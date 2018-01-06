@@ -1,18 +1,18 @@
-var _ = require('underscore'),
-  keystone = require('keystone');
-
+const _        = require('underscore');
 /**
  Initialises the standard view locals.
  Include anything that should be initialised before route controllers are executed.
  */
 exports.initLocals = function(req, res, next) {
 
-  var locals = res.locals;
+  const locals = res.locals;
+
+  locals.navLinks = [
+    {label: 'Home', key: 'home', href: '/'},
+    { label: 'Posts', key: 'post', href: '/post'}
+  ];
 
   locals.user = req.user;
-
-  // Add your own local variables here
-
   next();
 
 };
@@ -46,7 +46,7 @@ exports.initErrorHandlers = function(req, res, next) {
  */
 exports.flashMessages = function(req, res, next) {
 
-  var flashMessages = {
+  const flashMessages = {
     info: req.flash('info'),
     success: req.flash('success'),
     warning: req.flash('warning'),
@@ -59,17 +59,3 @@ exports.flashMessages = function(req, res, next) {
 
 };
 
-exports.navbar = function(req, res, next) {
-
-  var navbar = {
-    name: req.flash('info'),
-    success: req.flash('success'),
-    warning: req.flash('warning'),
-    error: req.flash('error')
-  };
-
-  res.locals.messages = _.any(flashMessages, function(msgs) { return msgs.length }) ? flashMessages : false;
-
-  next();
-
-};

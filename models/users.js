@@ -10,4 +10,5 @@ User.add({
   canAccessKeystone: { type: Boolean, initial: true }
 });
 
+User.defaultColumns = 'name, email, canAccessKeystone';
 User.register();

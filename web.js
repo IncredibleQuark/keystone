@@ -1,4 +1,4 @@
-var keystone = require('keystone');
+const keystone = require('keystone');
 keystone.init({
 
   'name': 'My Project',

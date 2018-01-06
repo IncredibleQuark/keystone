@@ -1,6 +1,7 @@
-var keystone = require('keystone'),
+const keystone = require('keystone'),
   middleware = require('./middleware'),
-  importRoutes = keystone.importer(__dirname);
+  importRoutes = keystone.importer(__dirname),
+  apiHandlers = require('./api/post');
 
 // Common Middleware
 keystone.pre('routes', middleware.initErrorHandlers);
@@ -14,7 +15,7 @@ keystone.set('404', function(req, res, next) {
 
 // Handle other errors
 keystone.set('500', function(err, req, res, next) {
-  var title, message;
+  let title = 'Page not found', message = 'Page your were looking for does not exists';
   if (err instanceof Error) {
     message = err.message;
     err = err.stack;
@@ -23,14 +24,17 @@ keystone.set('500', function(err, req, res, next) {
 });
 
 // Load Routes
-var routes = {
-  views: importRoutes('./views')
+const routes = {
+  views: importRoutes('./views'),
 };
 
 // Bind Routes
-exports = module.exports = function(app) {
+exports = module.exports = (app) => {
 
+  //views
   app.get('/', routes.views.index);
-  //route controllers app.post get etc.
+  app.get('/post', routes.views.post);
 
+  //api
+  app.get('/api/post', apiHandlers.getPosts);
 }
