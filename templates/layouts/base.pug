@@ -6,8 +6,9 @@ html
         meta(charset="utf-8")
         meta(name="viewport", content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width")
 
-        title= title || 'My Keystone Website'
+        title= title || 'Çınar Eslek'
         link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+        link(rel="stylesheet" href="/styles/bootstrap/bootstrap.css")
         link(href="/styles/custom.css", rel="stylesheet")
 
         block css
@@ -27,18 +28,11 @@ html
                             span.icon-bar
                             span.icon-bar
                             span.icon-bar
-                        a.navbar-brand(href='/') blog
                     .collapse.navbar-collapse
                         ul.nav.navbar-nav.navbar-left
                             each link in navLinks
                                 li(class=(section === link.key ? 'active' : null)): a(href=link.href)= link.label
-                        ul.nav.navbar-nav.navbar-right
-                            if user
-                                if user.canAccessKeystone
-                                    li: a(href='/keystone') Open Keystone
-                                li: a(href='/keystone/signout') Sign Out
-                            else
-                                li: a(href='/keystone/signin') Sign In
+
 
         #body
 
@@ -48,6 +42,10 @@ html
 
             block content
 
-    //script(src='/js/lib/jquery/jquery-1.10.2.min.js')
+
+    script(src='/js/jquery/jquery-3.2.1.min.js')
+    script(src='/js/jquery/jquery-ui.js')
+    script(src='/js/bootstrap/bootstrap.bundle.js')
+    script(src='/js/bootstrap/bootstrap.js')
 
     block js

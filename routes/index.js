@@ -1,7 +1,7 @@
 const keystone = require('keystone'),
   middleware = require('./middleware'),
   importRoutes = keystone.importer(__dirname),
-  apiHandlers = require('./api/post');
+  apiHandlers = require('./api/archive/');
 
 // Common Middleware
 keystone.pre('routes', middleware.initErrorHandlers);
@@ -33,8 +33,8 @@ exports = module.exports = (app) => {
 
   //views
   app.get('/', routes.views.index);
-  app.get('/post', routes.views.post);
+  app.get('/archive', routes.views.archive);
 
   //api
-  app.get('/api/post', apiHandlers.getPosts);
+  app.get('/api/archive', apiHandlers.getArchives);
 }

@@ -1,10 +1,10 @@
 const keystone = require('keystone');
 
-const Post = keystone.list('Post').model;
+const Archive = keystone.list('Archive').model;
 
 const handlers = {
-  getPosts: function(req, res) {
-    Post.find().exec((err, data) => {
+  getArchives: function(req, res) {
+    Archive.find().exec((err, data) => {
       if(err) {
         console.log(err);
         res.status(500).send('DB Error');
